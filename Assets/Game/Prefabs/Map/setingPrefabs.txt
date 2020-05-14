@@ -1,0 +1,5 @@
+ControlPoint 30, 30
+Finish 40, 40
+Line 1,30
+NumberCp 160,30
+Start 40,40
