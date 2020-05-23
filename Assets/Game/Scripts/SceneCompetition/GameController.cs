@@ -102,11 +102,11 @@ public class GameController : MonoBehaviour
 
     private void InstantiatePlayer()
     {
-        GameObject player = GameObject.Find(Constants.PLAYER);
-        player.transform.position = competition.StartsPlace.PlayerStartPosition;
-        player.transform.rotation = Quaternion.Euler(competition.StartsPlace.Rotation);
+        Transform player = Resources.Load("Player", typeof(Transform)) as Transform;
+        Transform instance = Instantiate(player, competition.StartsPlace.PlayerStartPosition, Quaternion.Euler(competition.StartsPlace.Rotation));
+        instance.name = PlayerProfile.GetFullName();
 
-        Puncher puncher = player.GetComponentInChildren<Puncher>();
+        Puncher puncher = instance.GetComponentInChildren<Puncher>();
         puncher.Athlete = athletes.Find(x => x.Id == 0);
         puncher.Route = PlayerProfile.Gender == Gender.male ? competition.RouteMan : competition.RouteWoman;
     }
