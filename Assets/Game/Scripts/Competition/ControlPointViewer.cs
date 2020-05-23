@@ -52,13 +52,13 @@ public class ControlPointViewer : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.CompareTag(Constants.PLAYER_TAG))
+        if (collider.CompareTag(Constants.PLAYER))
         { enabled = true; }
     }
 
     void OnTriggerExit(Collider collider)
     {
-        if (collider.CompareTag(Constants.PLAYER_TAG))
+        if (collider.CompareTag(Constants.PLAYER))
         { enabled = false; }
     }
 }
