@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using static Constants;
 
@@ -27,6 +28,17 @@ public class TestDataProvider : MapDataProvider
     protected override float InitMapScale()
     {
         return 50f;
+    }
+
+    public override SkyBoxData SkyBoxDataDay()
+    {
+        Material material = Resources.Load("skyboxes/skybox2") as Material; 
+        return new SkyBoxData(material, new DateTime(1, 1, 1, 10, 0, 0));
+    }
+
+    public override SkyBoxData SkyBoxDataNight()
+    {
+        throw new NotImplementedException();
     }
 
     protected override float[,] ControlPointsPositions => new float[,] {

@@ -36,14 +36,8 @@ public class Puncher : MonoBehaviour
             punches.Add(punch);
             previosControlPoint = controlPoint;
             Debug.Log(punch);
+            collider.GetComponent<AudioSource>().Play();
         }
-
-        //if (lastPunch == null || (lastPunch != null && lastPunch.time.AddSeconds(playSoundInterval) >= clock.time))
-        // {
-        //TODO 
-        //play music
-        //Debug.Log("sound");
-        //  }
 
         if (controlPoint.Equals(Route.GetLastControlPoint().GetNumber()))
         {

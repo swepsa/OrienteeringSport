@@ -17,6 +17,9 @@ public abstract class MapDataProvider : MonoBehaviour
     public List<FinishPlace> FinishPlaces { get; private set; }
     public float MapScale { get; private set; }
 
+    public abstract SkyBoxData SkyBoxDataDay();
+    public abstract SkyBoxData SkyBoxDataNight();
+
     private void InitStartPlaces()
     {
         StartPlaces = CreateStartPlaces();

@@ -11,6 +11,7 @@ public class Competition : MonoBehaviour
     public Route RouteWoman { get => routeWoman; set => routeWoman = value; }
     public StartsPlace StartsPlace { get; protected set; }
     public float ScaleMap { get; private set; }
+    public DateTime CompetisionStartTime { get; private set; }
 
     public class CompetitionCreator : Competition
     {
@@ -40,6 +41,16 @@ public class Competition : MonoBehaviour
             terrain.name = "Terrain";
             mapDataProvider = terrain.GetComponent<MapDataProvider>();
             ScaleMap = mapDataProvider.MapScale;
+
+            //SkyBox
+            SkyBoxData skyBoxData;
+            if (cEvent.CompetitionTypeByTime == CompetitionTypeByTime.Day)
+            {
+                skyBoxData = mapDataProvider.SkyBoxDataDay();
+            }
+            else { skyBoxData = mapDataProvider.SkyBoxDataNight(); }
+            skyBoxData.ChangeSky();
+            CompetisionStartTime = skyBoxData.competisionStartTime;
         }
 
         private void CreateStartsFinishPlaces()

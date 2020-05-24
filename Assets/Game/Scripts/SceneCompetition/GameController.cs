@@ -13,7 +13,6 @@ public class GameController : MonoBehaviour
     private Results resultsMan;
     private Results resultsWoman;
     private List<Athlete> athletes;
-    private DateTime startTime;
 
     private void Awake()
     {
@@ -60,7 +59,8 @@ public class GameController : MonoBehaviour
 
         if (PlayerProfile.Id.Equals(athlete.Id))
         {
-            GameOver();
+            Invoke("GameOver", 1);
+            //GameOver();
         }
     }
 
@@ -79,13 +79,9 @@ public class GameController : MonoBehaviour
 
     private Dictionary<Athlete, DateTime> CreateStartList()
     {
-        if (DataHolder.CompetitionEvent.CompetitionTypeByTime == CompetitionTypeByTime.Day)
-        { startTime = new DateTime(1, 1, 1, 10, 0, 0); }
-        else { startTime = new DateTime(1, 1, 1, 2, 0, 0); }
-
         Dictionary<Athlete, DateTime> startList = new Dictionary<Athlete, DateTime>
         {
-            { athletes.Find(x => x.Id == 0), startTime }
+            { athletes.Find(x => x.Id == 0), competition.CompetisionStartTime }
         };
         startList = startList.OrderBy(pair => pair.Value).ToDictionary(pair => pair.Key, pair => pair.Value);
         return startList;
@@ -114,13 +110,14 @@ public class GameController : MonoBehaviour
     private void StartClock()
     {
         Clock clock = GetComponent<Clock>();
-        clock.ClockTime = startTime;
+        clock.ClockTime = competition.CompetisionStartTime;
     }
 
     private void GameOver()
     {
         DataHolder.ResultsMan = resultsMan;
         DataHolder.ResultsWoman = resultsWoman;
+        System.Threading.Thread.Sleep(300);
         SceneManager.LoadScene("Results");
     }
 }
